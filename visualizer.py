@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 """
-
-Generates graphics to show traversal paths for linear and convolutive
-iteration.
-
-Written by Patrick Fuller, patrickfuller@gmail.com, 19 Nov 12
-
+Visualizer for Conway's game of life. Draws cells to a centered grid. 
 """
 
 import Image, ImageDraw
