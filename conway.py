@@ -17,7 +17,7 @@ def run(population, generations=100):
     population = set(population)
     for i in range(generations):
         population = evolve(population)
-    return list(population) 
+    return list(population)
 
 
 def evolve(population):
