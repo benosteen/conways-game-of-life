@@ -8,7 +8,7 @@ pygame.midi.init()
 # 2 corresponds to my USB MIDI output
 # 0 is often the default software MIDI
 # Trial and Error needed here unfortunately
-m = pygame.midi.Output(2)
+m = pygame.midi.Output(0)
 
 SCALES = {'CMAJOR': [0,2,4,5,7,9,11],
           'BLUES': [0,3,5,6,7,10,11],
@@ -25,10 +25,10 @@ note_length = 0.2 # 200ms
 maxbounds = (32,24) # 32 notes long, 24 (3 octaves) high
 
 # Pick a scale from above or manufacture your own
-scale = SCALES['INSEN']
+default_scale = SCALES['INSEN']
 
 # Notes start at:
-offset = 30
+OFFSET = 30
 
 # NB cells run from 0 to 31, and 0 to 23
 
@@ -64,7 +64,7 @@ def evolve(population):
     # Return the new surviving population
     return new_population
 
-def play_midi(notes):
+def play_midi(notes, scale = default_scale):
     for cursor in range(maxbounds[0]):
         t = time()
         keys = []
@@ -97,8 +97,6 @@ def pic_to_set(lifestring):
         y += 1
     return i_pop
 
-#glider = set([(0,0), (1,0), (2,0), (0,1), (1,2)])
-
 # See http://www.argentum.freeserve.co.uk/lex.htm
 # (Game of Life Lexicon)
 
@@ -127,18 +125,20 @@ OO........O...O.OO....O.O...........
 ...........O...O....................
 ............OO......................"""
 
+def play_state(state, scale = default_scale, cycles = 10, offset = OFFSET):
+    gameset = pic_to_set(state)
 
-#gameset = pic_to_set(beehive_and_dock)
-gameset = pic_to_set(gospel_gun)
-#gameset = pic_to_set(glider)
+    for i in range(cycles):
+        notes = {}
+        gameset = evolve(gameset)
+        vis(gameset)
+        for alivepoint in gameset:
+            x,y = alivepoint
+            if not notes.has_key(x):
+                notes[x] = []
+            notes[x].append(y+offset)
+        play_midi(notes, scale)
 
-for i in range(200):
-    notes = {}
-    gameset = evolve(gameset)
-    vis(gameset)
-    for alivepoint in gameset:
-        x,y = alivepoint
-        if not notes.has_key(x):
-            notes[x] = []
-        notes[x].append(y+offset)
-    play_midi(notes)
+if __name__ == "__main__":
+    play_state(gospel_gun, SCALES['INSEN'])
+    pygame.midi.quit()
