@@ -17,7 +17,11 @@ There are example scripts to help you tinker with the outputs:
 - [germ.py](https://github.com/benosteen/conways-game-of-life/blob/master/germ.py)
 - [infinite_growth.py](https://github.com/benosteen/conways-game-of-life/blob/master/infinite_growth.py)
 
-The musical scale it maps the game state to are set at the beginning of the [conway.py](https://github.com/benosteen/conways-game-of-life/blob/master/conway.py) file but you can always add in your own. Scales atart at zero and each integer increase is a semitone up.
+The musical scale it can map to are set at the beginning of the [conway.py](https://github.com/benosteen/conways-game-of-life/blob/master/conway.py) file but you can always add in your own. Scales start at zero and each integer increase is a semitone up. For example, the C Major scale (C,D,E,F,G,A,B) is [0,2,4,5,7,9,11].
+
+    ...
+    play_state(state, scale = [0,2,4,5,7,9,11], ...)
+    ...
 
 Drawing the initial state should also be easy to work out from these examples too!
 
