@@ -12,3 +12,11 @@ Notes
 You will have to adjust the MIDI output (line 11) until you get music notes. If using a USB MIDI device, you'll probably see an LED flashing to show traffic going through it.
 
 You might want to change the note length (line 24), the scale used (line 28) or the initial state (line 132).
+
+Requirements
+============
+
+As this is a MIDI app, you need MIDI type things:
+
+libportmidi0
+pygame
