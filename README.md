@@ -15,15 +15,17 @@ You will have to adjust the MIDI output (line 11) until you get music notes. If 
 There are example scripts to help you tinker with the outputs:
 - [glider_pusher.py](https://github.com/benosteen/conways-game-of-life/blob/master/glider_pusher.py)
 - [germ.py](https://github.com/benosteen/conways-game-of-life/blob/master/germ.py)
+- [infinite_growth.py](https://github.com/benosteen/conways-game-of-life/blob/master/infinite_growth.py)
 
-The scales it is drawing from appear at the beginning of the [conway.py](https://github.com/benosteen/conways-game-of-life/blob/master/conway.py) file but you can always add in your own. Scales atart at zero and each integer increase is a semitone up.
+The musical scale it maps the game state to are set at the beginning of the [conway.py](https://github.com/benosteen/conways-game-of-life/blob/master/conway.py) file but you can always add in your own. Scales atart at zero and each integer increase is a semitone up.
 
 Drawing the initial state should also be easy to work out from these examples too!
 
 Requirements
 ============
 
-As this is a MIDI app, you need MIDI type things:
+As this relies on pygame's midi interface, you'll need that set up. On linux, it's just a case of getting pygame installed.
 
-libportmidi0
-pygame
+Key libraries:
+- libportmidi0
+- pygame
