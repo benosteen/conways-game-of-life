@@ -8,10 +8,17 @@ So, adapting [patrickfuller's Game Of Life implementation](https://github.com/pa
 Notes
 =====
 
-*conway.py*
+[conway.py](https://github.com/benosteen/conways-game-of-life/blob/master/conway.py):
+
 You will have to adjust the MIDI output (line 11) until you get music notes. If using a USB MIDI device, you'll probably see an LED flashing to show traffic going through it.
 
-You might want to change the note length (line 24), the scale used (line 28) or the initial state (line 132).
+There are example scripts to help you tinker with the outputs:
+- [glider_pusher.py](https://github.com/benosteen/conways-game-of-life/blob/master/glider_pusher.py)
+- [germ.py](https://github.com/benosteen/conways-game-of-life/blob/master/germ.py)
+
+The scales it is drawing from appear at the beginning of the [conway.py](https://github.com/benosteen/conways-game-of-life/blob/master/conway.py) file but you can always add in your own. Scales atart at zero and each integer increase is a semitone up.
+
+Drawing the initial state should also be easy to work out from these examples too!
 
 Requirements
 ============
