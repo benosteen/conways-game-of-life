@@ -25,5 +25,5 @@ OOO......................
 .................O....O.."""
 
 if __name__ == "__main__":
-    play_state(state, SCALES['HIRAJOSHI'], cycles = 10, offset = offset)
+    play_state(state, SCALES['HIRAJOSHI'], cycles = 100, offset = offset)
     pygame.midi.quit()
