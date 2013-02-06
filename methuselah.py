@@ -16,5 +16,6 @@ state = """
 """
 
 if __name__ == "__main__":
-    play_and_render(state, SCALES['MINORPENT'], cycles = 200, offset = offset)
+#    play_and_render(state, SCALES['MINORPENT'], cycles = 200, offset = offset)
+    play_state(state, SCALES['MINORPENT'], cycles = 200, offset = offset)
     pygame.midi.quit()

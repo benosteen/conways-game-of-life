@@ -21,14 +21,14 @@ SCALES = {'CMAJOR': [0,2,4,5,7,9,11],
           'CHROMATIC': [0,1,2,3,4,5,6,7,8,9,10,11]
           }
 
-note_length = 0.2 # 200ms
-maxbounds = (32,24) # 32 notes long, 24 (3 octaves) high
+note_length = 0.05 # 200ms
+maxbounds = (32,32) # 32 notes long, 32 pitches high
 
 # Pick a scale from above or manufacture your own
-default_scale = SCALES['INSEN']
+default_scale = SCALES['MINORPENT']
 
 # Notes start at:
-OFFSET = 30
+OFFSET = 10 
 
 # NB cells run from 0 to 31, and 0 to 23
 
@@ -90,10 +90,14 @@ def vis(pop):
 def pic_to_set(lifestring):
     i_pop = set()
     y = 0
+    height = len(lifestring.split("\n"))
+    width = len(lifestring.split("\n")[1])
+    h_offset = (maxbounds[1] - height) / 2
+    w_offset = (maxbounds[0] - width) / 2
     for line in lifestring.split("\n"):
         for idx, char in enumerate(line):
             if char == "O":
-                i_pop.add((idx,y))
+                i_pop.add((idx+w_offset,y+h_offset))
         y += 1
     return i_pop
 
@@ -125,7 +129,7 @@ OO........O...O.OO....O.O...........
 ...........O...O....................
 ............OO......................"""
 
-def play_state(state, scale = default_scale, cycles = 10, offset = OFFSET):
+def play_state(state, scale = default_scale, cycles = 100, offset = OFFSET):
     gameset = pic_to_set(state)
 
     for i in range(cycles):
@@ -139,6 +143,22 @@ def play_state(state, scale = default_scale, cycles = 10, offset = OFFSET):
             notes[x].append(y+offset)
         play_midi(notes, scale)
 
+def play_and_render(state, scale = default_scale, cycles = 100, offset = OFFSET):
+    from conway_image import draw
+    gameset = pic_to_set(state)
+    for i in range(cycles):
+        notes = {}
+        gameset = evolve(gameset)
+        img = draw(gameset, (640,480), maxbounds[0], 4)
+        img.save("glider/conway%03d.jpg" % i, "JPEG")
+        for alivepoint in gameset:
+            x,y = alivepoint
+            if not notes.has_key(x):
+                notes[x] = []
+            notes[x].append(y+offset)
+        play_midi(notes, scale)
+
 if __name__ == "__main__":
-    play_state(gospel_gun, SCALES['INSEN'])
+    play_state(gospel_gun, SCALES['MINORPENT'], 100)
+#    play_and_render(gospel_gun, SCALES['MINORPENT'], 100)
     pygame.midi.quit()
